@@ -1,0 +1,41 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    color:#ebecf0;
+    font-family: Arial, Helvetica, sans-serif;
+    list-style: none;
+    text-transform: capitalize;
+    white-space: pre-wrap;
+}
+
+#library {
+    margin: 1em 0;
+    padding: 0;
+    max-width: 30em;
+}
+
+#library div {
+    list-style: none;
+    margin: 1em 0;
+    padding: 20px 10px;
+    background: #2b2b2b;
+    position: relative;
+}
+
+#library a.main {
+    color: #85baff;
+    text-align: right;
+    display: block;
+    z-index: 1;
+}
+
+#library div a.main::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom 0;
+    content: ' ';
+}
