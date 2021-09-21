@@ -16,17 +16,34 @@ function addBookToLibrary(book) {
 
 function render(myLibrary) {
     const library = document.getElementById('library');
+
+    //resetting the render; doesn't cause render to be additive
     library.innerHTML = "";
-    /*const oldBooks = document.querySelectorAll('li');
-    library.removeChild(Array.from(oldBooks));
-    //oldBooks.remove();*/
+
     for (let book of myLibrary) {
         let card = document.createElement('div');
+        let link = document.createElement('a');
+        let closeBtn = document.createElement('button');
 
+        //giving the card a class of "card"
         card.classList.add('card');
 
+        //creating a close button
+        closeBtn.title = "click to delete";
+        closeBtn.innerText = 'x';
+
+        //giving a global link to the card, can make it link someone if req'd
+        link.href = "#no";
+        link.innerText = "yoza"; //not needed ofc lmao
+
+        //giving all the properties to our card
         Object.keys(book).forEach(prop => card.append(`${prop}: ${book[prop]} \n`));
 
+        //appending our elements to the card
+        card.appendChild(link);
+        card.appendChild(closeBtn);
+
+        //appending our card into the library
         library.append(card);
     }
 }
@@ -39,6 +56,7 @@ addBookToLibrary(hehe);
 
 render(myLibrary);
 
+//add book to library
 const btn = document.getElementById('addBook');
 btn.addEventListener('click', () => {
     let title = document.getElementById('bookForm').elements['title'];
@@ -57,3 +75,5 @@ btn.addEventListener('click', () => {
     pages.value = "";
     read.checked = false;
 });
+
+//toggle read or not read
