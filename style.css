@@ -25,7 +25,7 @@
 #library {
     margin: 1em 0;
     padding: 0;
-    max-width: 30em;
+    /*max-width: 30em;*/
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -46,6 +46,7 @@
     z-index: 1;
 }
 
+/*
 .card a::after {
     position: absolute;
     top: 0;
@@ -54,6 +55,7 @@
     bottom: 0;
     content: ' ';
 }
+*/
 
 .card:hover a,
 .card:focus-within a{

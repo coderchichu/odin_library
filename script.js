@@ -11,8 +11,12 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(book) {
-   return myLibrary.push(book);
+    return myLibrary.push(book);
 }
+
+/*function addBookToLibrary(book) {
+    return myLibrary.push(book);
+ }*/
 
 function render(myLibrary) {
     const library = document.getElementById('library');
@@ -20,27 +24,31 @@ function render(myLibrary) {
     //resetting the render; doesn't cause render to be additive
     library.innerHTML = "";
 
-    for (let book of myLibrary) {
+    for (let [index, book] of myLibrary.entries()) {
         let card = document.createElement('div');
-        let link = document.createElement('a');
         let closeBtn = document.createElement('button');
 
         //giving the card a class of "card"
         card.classList.add('card');
+        card.id = index;
 
         //creating a close button
         closeBtn.title = "click to delete";
         closeBtn.innerText = 'x';
+        closeBtn.id = index;
 
+        /*
         //giving a global link to the card, can make it link someone if req'd
         link.href = "#no";
+        link.id = index;
+        link.onclick = "toggleRead()";
         link.innerText = "yoza"; //not needed ofc lmao
+        */
 
         //giving all the properties to our card
         Object.keys(book).forEach(prop => card.append(`${prop}: ${book[prop]} \n`));
 
         //appending our elements to the card
-        card.appendChild(link);
         card.appendChild(closeBtn);
 
         //appending our card into the library
@@ -68,12 +76,29 @@ btn.addEventListener('click', () => {
 
     render(myLibrary);
 
-    console.log(title);
-
     title.value = "";
     author.value = "";
     pages.value = "";
     read.checked = false;
 });
 
-//toggle read or not read
+//toggle read function and delete book function
+function toggleRead(evt) {
+
+    let chosen = evt.target.nodeName;
+    let bookId = evt.target.id;
+
+    if (chosen === "DIV") {
+        let read = myLibrary[bookId].read;
+        myLibrary[bookId].read = read === '✅' ? '❌' : '✅';
+    }
+
+    if (chosen === "BUTTON") {
+        myLibrary.splice(bookId,1);
+    }
+
+    render(myLibrary);
+}
+
+const ul = document.querySelector('ul');
+ul.addEventListener('click', toggleRead, false);
